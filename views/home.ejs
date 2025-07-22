@@ -1,0 +1,17 @@
+<%- include("partials/header.ejs") -%>
+        <h1>Home</h1>
+        <p class="content">
+            <%= startingContent %>
+        </p><br>
+       <% blogContent.forEach((post)=>{ %>
+           <h1><%= post.title %></h1>
+           <p class="content"> 
+            <% const truncatedContent = post.content.substring(0, 100); %>
+              <%= truncatedContent + "..." %>
+              <a href="/posts/<%= post.title %>" style="text-decoration: none; ">more</a>
+            </p>
+           <br>
+
+           <%  }) %>
+
+<%- include("partials/footer.ejs") -%>

@@ -1,0 +1,19 @@
+{
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "this is a blog website using ejs module",
+  "license": "ISC",
+  "author": "Prayush",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "lodash": "^4.17.21",
+    "static": "^2.0.0"
+  }
+}

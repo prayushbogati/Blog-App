@@ -1,0 +1,92 @@
+* {
+    margin: 0%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.content{
+    font-size: large;
+    text-align: justify;
+}
+
+body{
+    height: 1000px;
+    overflow:auto;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+.container{
+    margin: 0% 10%;
+}
+
+.header {
+    color: white;
+    background-color: gray;
+    display: flex;
+    padding: 20px;
+}
+
+.title a{
+    color: white;
+    text-decoration: none;
+}
+
+.title{
+    position: relative;
+    margin-left: 9%;
+}
+
+.navbar {
+    position: absolute;
+    right: 10%;
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0%;
+    padding: 0%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+
+.footer{
+    display: block;
+    width: 100%;
+    background-color: gray;
+    position: fixed;
+    bottom: 0%;
+    padding: 20px;
+    text-align: center;
+    font-size: large;
+}
+
+form input[type = "text"]{
+    width: 1000px;
+    padding: 10px;
+    font-size: 1rem;
+}
+form textarea{
+    width: 1000px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.publishBtn{
+    background-color: rgb(58, 98, 198);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1rem;
+}
