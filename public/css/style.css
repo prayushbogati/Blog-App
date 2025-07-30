@@ -3,6 +3,19 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+.composeBtn{
+    background-color: lightgray;
+    border: none;
+    padding: 10px;
+    font-size: large;
+    border-radius: 10px;
+}
+
+.composeBtn:hover{
+    background-color: gray;
+    color: white;
+}
+
 .content{
     font-size: large;
     text-align: justify;
