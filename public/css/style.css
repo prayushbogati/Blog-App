@@ -3,7 +3,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.composeBtn{
+.composeBtn {
     background-color: lightgray;
     border: none;
     padding: 10px;
@@ -11,25 +11,26 @@
     border-radius: 10px;
 }
 
-.composeBtn:hover{
+.composeBtn:hover {
     background-color: gray;
     color: white;
 }
 
-.content{
+.content {
     font-size: large;
     text-align: justify;
 }
 
-body{
+body {
     height: 1000px;
-    overflow:auto;
+    overflow: auto;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
     display: none;
 }
 
-.container{
+.container {
     margin: 0% 10%;
 }
 
@@ -40,12 +41,12 @@ body{
     padding: 20px;
 }
 
-.title a{
+.title a {
     color: white;
     text-decoration: none;
 }
 
-.title{
+.title {
     position: relative;
     margin-left: 9%;
 }
@@ -73,29 +74,30 @@ li a {
     display: block;
 }
 
-.footer{
+.footer {
     display: block;
     width: 100%;
     background-color: gray;
-    position: fixed;
-    bottom: 0%;
+    position: sticky;
+    top: 100%;
     padding: 20px;
     text-align: center;
     font-size: large;
 }
 
-form input[type = "text"]{
-    width: 1000px;
-    padding: 10px;
-    font-size: 1rem;
-}
-form textarea{
+form input[type="text"] {
     width: 1000px;
     padding: 10px;
     font-size: 1rem;
 }
 
-.publishBtn{
+form textarea {
+    width: 1000px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.publishBtn {
     background-color: rgb(58, 98, 198);
     color: white;
     border: none;

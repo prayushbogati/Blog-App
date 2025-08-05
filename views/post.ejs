@@ -6,4 +6,8 @@
     <p class="content" style="white-space: pre-wrap;"">
         <%= postContent %>
     </p>
-    <%- include("partials/footer.ejs") -%>
+    <form action="/deletePost" method="post">
+        <input type="hidden" name="title" value="<%= id %>">
+        <button type="submit">deletePost</button>
+        </form>
+        <%- include("partials/footer.ejs") -%>

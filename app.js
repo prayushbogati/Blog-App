@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const _ = require("lodash");
+const mongoose = require("mongoose");
+const { log } = require("console");
 
 const app = express();
 const port = 3000;
@@ -11,7 +13,7 @@ const text2 = "Aenean a volutpat ante. Nam eget scelerisque eros. Vivamus mollis
 
 const text3 = "Aliquam dapibus sed mauris vitae sollicitudin. Duis ullamcorper tortor sed odio ullamcorper mollis. Aliquam elementum ante sem, eu iaculis eros accumsan vitae. Donec sodales purus mi, non dignissim nulla laoreet euismod. Nam ultricies odio mauris, vitae malesuada augue rhoncus sit amet. Duis tristique ultricies vulputate. Sed id odio posuere, faucibus magna eu, finibus justo. Quisque ac dolor pellentesque, tristique neque non, accumsan quam. Etiam in arcu vel nisl sollicitudin rhoncus at non leo. Nam id porttitor sapien. Nam auctor, orci in ullamcorper mattis, enim nulla volutpat velit, in pharetra eros augue vitae sem. Donec ut commodo tortor. Vivamus mattis iaculis auctor. Proin porta, quam sodales vulputate tincidunt, ante enim interdum sem, vel auctor lacus elit dignissim erat.";
 
-const posts = [];
+// const posts = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -23,7 +25,18 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
+
+mongoose.connect("mongodb://localhost:27017/blogDB");
+
+const blogSchema = mongoose.Schema({
+    blogTitle: String,
+    blogContent: String
+})
+
+const blog = mongoose.model("blog", blogSchema);
+
+app.get("/", async (req, res) => {
+    const posts = await blog.find({});
     res.render("home", { startingContent: text1, blogContent: posts });
 })
 
@@ -39,23 +52,41 @@ app.get("/compose", (req, res) => {
     res.render("compose");
 })
 
-app.get("/posts/:topic", (req, res) => {
+app.get("/posts/:topic", async (req, res) => {
     const title = _.lowerCase(req.params.topic);
-    posts.forEach(post => {
-        const storedTite = _.lowerCase(post.title);
-        if (storedTite === title) {
-            res.render("post", {postTitle: post.title, postContent: post.content});
-        }
+    const posts = await blog.find({});
+    const matchedPost = posts.find(posts => {
+        return _.lowerCase(posts.blogTitle) === title;
     }
     );
+    // posts.forEach(post => {
+    //     const storedTite = _.lowerCase(post.blogTitle);
+    if (matchedPost) {
+        res.render("post", { postTitle: matchedPost.blogTitle, postContent: matchedPost.blogContent, id: matchedPost._id });
+    }
+    else {
+        res.send("data not present!");
+    }
+    // }
+    // );
 })
 
-app.post("/compose", (req, res) => {
-    const post = {
-        title: req.body.blogTitle,
-        content: req.body.blogPost
-    }
-    posts.push(post);
+app.post("/deletePost", (req, res) => {
+    console.log(req.body.title);
+    res.send();
+})
+
+app.post("/compose", async (req, res) => {
+    // const post = {
+    //     title: req.body.blogTitle,
+    //     content: req.body.blogPost
+    // }
+    // posts.push(post);
+    const post = new blog({
+        blogTitle: req.body.blogTitle,
+        blogContent: req.body.blogPost
+    })
+    await post.save();
     res.redirect("/");
 })
 
