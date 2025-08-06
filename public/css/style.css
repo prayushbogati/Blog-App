@@ -18,7 +18,9 @@
 
 .content {
     font-size: large;
-    text-align: justify;
+    /* text-align: justify; */
+    word-wrap: break-word;
+
 }
 
 body {
@@ -44,6 +46,7 @@ body {
 .title a {
     color: white;
     text-decoration: none;
+    font-size: larger;
 }
 
 .title {
@@ -54,6 +57,7 @@ body {
 .navbar {
     position: absolute;
     right: 10%;
+    font-size: large;
 }
 
 ul {

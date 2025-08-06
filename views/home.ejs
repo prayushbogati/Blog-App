@@ -1,18 +1,23 @@
 <%- include("partials/header.ejs") -%>
-<a href="/compose" style="position: absolute; right: 20px; top: 80px;"><button type="button" class="composeBtn">Compose</button></a>
-        <h1>Home</h1>
-        <p class="content">
-            <%= startingContent %>
-        </p><br>
-       <% blogContent.forEach((post)=>{ %>
-           <h1><%= post.blogTitle %></h1>
-           <p class="content"> 
-            <% const truncatedContent = post.blogContent.substring(0, 100); %>
-              <%= truncatedContent + "..." %>
-              <a href="/posts/<%= post.blogTitle %>" style="text-decoration: none; ">more</a>
-            </p>
-           <br>
+  <a href="/compose" style="position: absolute; right: 10px; top: 90px;"><button type="button"
+      class="composeBtn">Compose</button></a>
+  <h1>
+    <%= homeTitle %>
+  </h1>
+  <p class="content">
+    <%= startingContent %>
+  </p><br>
+  <% blogContent.forEach((post)=>{ %>
+    <h1>
+      <%= post.blogTitle %>
+    </h1>
+    <p class="content">
+      <% const truncatedContent=post.blogContent.substring(0, 100); %>
+        <%= truncatedContent + "..." %>
+          <a href="/posts/<%= post.blogTitle %>" style="text-decoration: none; ">more</a>
+    </p>
+    <br>
 
-           <%  }) %>
+    <% }) %>
 
-<%- include("partials/footer.ejs") -%>
+      <%- include("partials/footer.ejs") -%>

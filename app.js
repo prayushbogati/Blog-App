@@ -35,17 +35,58 @@ const blogSchema = mongoose.Schema({
 
 const blog = mongoose.model("blog", blogSchema);
 
+const defaultSchema = mongoose.Schema({
+    title: String,
+    content: String
+})
+
+const defaultInfo = mongoose.model("defaultInfo", defaultSchema);
+
+const homeData = new defaultInfo({
+    title: "Home",
+    content: "This is the home content.."
+})
+const aboutData = new defaultInfo({
+    title: "About",
+    content: "This is the about content.."
+})
+const contactData = new defaultInfo({
+    title: "Contact",
+    content: "This is the contact content.."
+})
+
+const defaultItems = [homeData, aboutData, contactData];
+
+(async () => {
+    try {
+        const count = await defaultInfo.countDocuments({});
+        if (count === 0) {
+            await defaultInfo.insertMany(defaultItems);
+            console.log("Default items inserted.");
+        } else {
+            console.log("Default items already exist. Skipping insertion.");
+        }
+    } catch (err) {
+        console.error("Error checking/inserting default items:", err);
+    }
+})();
+
+
 app.get("/", async (req, res) => {
     const posts = await blog.find({});
-    res.render("home", { startingContent: text1, blogContent: posts });
+    const homePost = await defaultInfo.findOne({ title: "Home" });
+    res.render("home", { homeTitle: homePost.title, startingContent: homePost.content, blogContent: posts });
 })
 
-app.get("/about", (req, res) => {
-    res.render("about", { aboutContent: text2 });
+app.get("/about", async (req, res) => {
+    const aboutPost = await defaultInfo.findOne({ title: "About" });
+
+    res.render("about", { aboutTitle: aboutPost.title, aboutContent: aboutPost.content });
 })
 
-app.get("/contact", (req, res) => {
-    res.render("contact", { contactContent: text3 });
+app.get("/contact", async (req, res) => {
+    const contactPost = await defaultInfo.findOne({ title: "Contact" });
+    res.render("contact", { contactTitle: contactPost.title, contactContent: contactPost.content });
 })
 
 app.get("/compose", (req, res) => {
@@ -71,9 +112,10 @@ app.get("/posts/:topic", async (req, res) => {
     // );
 })
 
-app.post("/deletePost", (req, res) => {
-    console.log(req.body.title);
-    res.send();
+app.post("/deletePost", async(req, res) => {
+    const id = req.body.title;
+    await blog.findByIdAndDelete(id);
+    res.redirect("/");
 })
 
 app.post("/compose", async (req, res) => {

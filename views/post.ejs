@@ -3,11 +3,12 @@
     <h1>
         <%= postTitle %>
     </h1>
-    <p class="content" style="white-space: pre-wrap;"">
+    <p class="content">
         <%= postContent %>
-    </p>
-    <form action="/deletePost" method="post">
+    </p><br>
+    <form action=" /deletePost" method="post">
         <input type="hidden" name="title" value="<%= id %>">
         <button type="submit">deletePost</button>
         </form>
+
         <%- include("partials/footer.ejs") -%>
